@@ -55,7 +55,7 @@ MOVLF   macro  literal,dest
 Mainline
         rcall  Initial          ;Initialize everything
 Loop
-        btg  PORTC,RC2          ;Toggle pin, to support measuring loop time
+        ;btg  PORTC,RC2          ;Toggle pin, to support measuring loop time
         rcall  BlinkAlive       ;Blink "Alive" LED
         rcall  LoopTime         ;Make looptime be 0.1 milliseconds
 
@@ -94,8 +94,7 @@ return
 Bignum  equ     65536-250+12+2
 
 LoopTime
-        btfss  INTCON,TMR0IF    ;Wait until 0.1 milliseconds are up OR check if bit TMR0IF of INTCON == 1, skip next line if true
-        bra  LoopTime
+        btfss  INTCON,TMR0IF    ;Wait until 0.1 milliseconds are up OR check if bit TMR0IF of INTCON == 1, skip next line if true        bra  LoopTime
         movff  INTCON,INTCONCOPY  ;Disable all interrupts to CPU
         bcf  INTCON,GIEH
         movff  TMR0L,TMR0LCOPY  ;Read 16-bit counter at this moment
@@ -118,12 +117,25 @@ LoopTime
 ; seconds.
 
 BlinkAlive
-        bsf  PORTA,RA4          ;Turn off LED
         decf  ALIVECNT,F        ;Decrement loop counter and return if not zero
-        bnz  BAend
-        MOVLF  4,ALIVECNT     ;Reinitialize BLNKCNT
-        bcf  PORTA,RA4          ;Turn on LED for ten milliseconds every 2.5 sec
+		bnz	  BAend
+		btfss	PORTC, RC2		;check if RC2 is set, if not, set it, arbitrarily chosen 
+								; since we are setting RC2 and RE2 simultaneously 
+		bra		SETBIT
+		bra		CLEARBIT
+
+SETBIT
+        MOVLF  7,ALIVECNT     	;Reinitialize BLNKCNT to the 
+        bsf  PORTC,RC2          ;Turn on LED for ten milliseconds every 2.5 sec
+        bsf  PORTE,RE2          ;Turn on LED for ten milliseconds every 2.5 sec
+		return
+
+CLEARBIT
+        MOVLF  2,ALIVECNT     	;Reinitialize BLNKCNT
+        bcf  PORTC,RC2          ;Turn on LED for ten milliseconds every 2.5 sec
+        bcf  PORTE,RE2          ;Turn on LED for ten milliseconds every 2.5 sec 
 BAend
         return
 
         end
+
