@@ -55,7 +55,6 @@ MOVLF   macro  literal,dest
 Mainline
         rcall  Initial          ;Initialize everything
 Loop
-        ;btg  PORTC,RC2          ;Toggle pin, to support measuring loop time
         rcall  BlinkAlive       ;Blink "Alive" LED
         rcall  LoopTime         ;Make looptime be 0.1 milliseconds
 
