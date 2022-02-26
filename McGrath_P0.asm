@@ -117,13 +117,13 @@ LoopTime
 ; seconds.
 
 BlinkAlive
-        decf  ALIVECNT,F       		;Decrement loop counter and return if not zero
-		bnz	  BAend
-		btfss	PORTC, RC2	;check if RC2 is set, if not, set it, arbitrarily chosen 
-					;since we are setting RC2 and RE2 simultaneously 
-					;could have used PORTE, RE2 instead
-		bra		SETBIT
-		bra		CLEARBIT
+        decf  ALIVECNT,F       	;Decrement loop counter and return if not zero
+	bnz	  BAend
+	btfss	PORTC, RC2	;check if RC2 is set, if not, set it, arbitrarily chosen 
+				;since we are setting RC2 and RE2 simultaneously 
+				;could have used PORTE, RE2 instead
+	bra		SETBIT
+	bra		CLEARBIT
 
 SETBIT
         MOVLF  7,ALIVECNT     	;Reinitialize ALIVECNT to the pulse time for Th
