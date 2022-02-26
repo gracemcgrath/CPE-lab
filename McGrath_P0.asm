@@ -120,20 +120,21 @@ BlinkAlive
         decf  ALIVECNT,F        ;Decrement loop counter and return if not zero
 		bnz	  BAend
 		btfss	PORTC, RC2		;check if RC2 is set, if not, set it, arbitrarily chosen 
-								; since we are setting RC2 and RE2 simultaneously 
+								;since we are setting RC2 and RE2 simultaneously 
+								;could have used PORTE, RE2 instead
 		bra		SETBIT
 		bra		CLEARBIT
 
 SETBIT
-        MOVLF  7,ALIVECNT     	;Reinitialize BLNKCNT to the 
-        bsf  PORTC,RC2          ;Turn on LED for ten milliseconds every 2.5 sec
-        bsf  PORTE,RE2          ;Turn on LED for ten milliseconds every 2.5 sec
+        MOVLF  7,ALIVECNT     	;Reinitialize ALIVECNT to the pulse time for Th
+        bsf  PORTC,RC2          ;Turn on LED
+        bsf  PORTE,RE2          ;Turn on LED
 		return
 
 CLEARBIT
-        MOVLF  2,ALIVECNT     	;Reinitialize BLNKCNT
-        bcf  PORTC,RC2          ;Turn on LED for ten milliseconds every 2.5 sec
-        bcf  PORTE,RE2          ;Turn on LED for ten milliseconds every 2.5 sec 
+        MOVLF  2,ALIVECNT     	;Reinitialize ALIVECNT to the pulse time Tl
+        bcf  PORTC,RC2          ;Turn off LED
+        bcf  PORTE,RE2          ;Turn off LED
 BAend
         return
 
