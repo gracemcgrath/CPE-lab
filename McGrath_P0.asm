@@ -118,7 +118,7 @@ LoopTime
 BlinkAlive
         decf  ALIVECNT,F       	;Decrement loop counter and return if not zero
 	bnz	  BAend
-	btfss	PORTC, RC2	;check if RC2 is set, if not, skip the next line of code 
+	btfss	PORTC, RC2	;check if RC2 is set, if it is, skip the next line of code 
 				;since I am setting RC2 and RE2 simultaneously, 
 				;I could have used either RC2 or RE2 in this line
 	bra		SETBIT
