@@ -82,16 +82,16 @@ DISPLAY2 macro  register
 Mainline
         rcall  Initial                 ;Initialize everything
 L1
-		bsf ADCON0, 1
+	bsf ADCON0, 1
 
 PL1
-		btfsc ADCON0,1
-		bra PL1
+	btfsc ADCON0,1
+	bra PL1
         btg  PORTC,RC2               ;Toggle pin, to support measuring loop time
         rcall  LoopTime              ;Make looptime be ten milliseconds
 		
         DISPLAY  ADRESH               ;Display PORTD as a binary number
-		DISPLAY2  ADRESL 
+	DISPLAY2  ADRESL 
         bra	L1
 
 
@@ -101,8 +101,8 @@ PL1
 
 Initial
         MOVLF  B'10001110',ADCON1      ;Enable PORTA & PORTE digital I/O pins
-		MOVLF  B'10001100',ADCON2      ;Enable PORTA & PORTE digital I/O pins
-		MOVLF  B'00011101',ADCON0      ;Enable PORTA & PORTE digital I/O pins
+	MOVLF  B'10001100',ADCON2      ;Enable PORTA & PORTE digital I/O pins
+	MOVLF  B'00011101',ADCON0      ;Enable PORTA & PORTE digital I/O pins
         MOVLF  B'11100001',TRISA       ;Set I/O for PORTA
         MOVLF  B'11011100',TRISB       ;Set I/O for PORTB
         MOVLF  B'11010000',TRISC       ;Set I/0 for PORTC
