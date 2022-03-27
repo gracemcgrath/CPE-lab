@@ -100,9 +100,9 @@ PL1
 ; This subroutine performs all initializations of variables and registers.
 
 Initial
-        MOVLF  B'10001110',ADCON1      ;Enable PORTA & PORTE digital I/O pins
-	MOVLF  B'10001100',ADCON2      ;Enable PORTA & PORTE digital I/O pins
-	MOVLF  B'00011101',ADCON0      ;Enable PORTA & PORTE digital I/O pins
+        MOVLF  B'10001110',ADCON1      ;Initialize ADCON1 for selected reference voltage
+	MOVLF  B'10001100',ADCON2      ;Initilaize ADCON2 for selected clock, acquisition time, and result justification
+	MOVLF  B'00011101',ADCON0      ;Initialize ADCON0 for selected input channel, GO_DONE bit, and ADON bit 
         MOVLF  B'11100001',TRISA       ;Set I/O for PORTA
         MOVLF  B'11011100',TRISB       ;Set I/O for PORTB
         MOVLF  B'11010000',TRISC       ;Set I/0 for PORTC
