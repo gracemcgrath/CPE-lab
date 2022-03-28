@@ -50,27 +50,27 @@ MOVLF   macro  literal,dest
 Mainline
         rcall  Initial                 ;Initialize everything
 L1
-		bsf ADCON0, 1
-		PL1
-		btfsc ADCON0,1
-		bra PL1
+	bsf ADCON0, 1
+PL1
+	btfsc ADCON0,1
+	bra PL1
 
-		bcf PORTC, RC0
-		bcf PIR1, SSPIF
-		MOVLF 0x21,SSPBUF
-		PL2
-		btfss PIR1, SSPIF				; check if SSPIF=1, if so, skip next line
-		bra PL2
+	bcf PORTC, RC0
+	bcf PIR1, SSPIF
+	MOVLF 0x21,SSPBUF
+PL2
+	btfss PIR1, SSPIF				; check if SSPIF=1, if so, skip next line
+	bra PL2
 
-		bcf PIR1, SSPIF
-		movff ADRESH, SSPBUF
-		PL3
-		btfss PIR1, SSPIF				; check if SSPIF=1, if so, skip next line
-		bra PL3
+	bcf PIR1, SSPIF
+	movff ADRESH, SSPBUF
+PL3
+	btfss PIR1, SSPIF				; check if SSPIF=1, if so, skip next line
+	bra PL3
 
-		bsf PORTC, RC0
+	bsf PORTC, RC0
 
-        bra	L1
+        bra L1
 
 
 ;;;;;;; Initial subroutine ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -78,18 +78,18 @@ L1
 ; This subroutine performs all initializations of variables and registers.
 
 Initial
-        MOVLF  B'10001110',ADCON1      ;Enable PORTA & PORTE digital I/O pins
-		MOVLF  B'00001100',ADCON2      ;Enable PORTA & PORTE digital I/O pins
-		MOVLF  B'00011101',ADCON0      ;Enable PORTA & PORTE digital I/O pins
+        MOVLF  B'10001110',ADCON1      ;Initialize ADCON1 for selected reference voltage
+	MOVLF  B'00001100',ADCON2      ;Initilaize ADCON2 for selected clock, acquisition time, and result justification
+	MOVLF  B'00011101',ADCON0      ;Initialize ADCON0 for selected input channel, GO_DONE bit, and ADON bit 
         MOVLF  B'11100001',TRISA       ;Set I/O for PORTA
         MOVLF  B'11011100',TRISB       ;Set I/O for PORTB
-        MOVLF  B'11010000',TRISC       ;Set I/0 for PORTC
+        MOVLF  B'11010000',TRISC       ;Set I/0 for PORTC for selecting output channels
         MOVLF  B'00001111',TRISD       ;Set I/O for PORTD
         MOVLF  B'00000100',TRISE       ;Set I/O for PORTE
         MOVLF  B'10001000',T0CON       ;Set up Timer0 for a looptime of 10 ms
         MOVLF  B'00010000',PORTA       ;Turn off all four LEDs driven from PORTA
-		MOVLF  B'00100000',SSPCON1	   ;
-		MOVLF  B'11000000',SSPSTAT
+	MOVLF  B'00100000',SSPCON1     ;Initialize SSPCON1 for selected internal SPI clock
+	MOVLF  B'11000000',SSPSTAT     ;Initialize SSPTSTAT for DA conversion
         return
 
 
