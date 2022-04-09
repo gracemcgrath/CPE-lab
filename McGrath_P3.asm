@@ -67,17 +67,17 @@ Initial
         MOVLF  B'00000011',PORTB       ;Enable INT0 and INT1 as inputrs 
         MOVLF  B'00010000',PORTA       ;Turn off all four LEDs driven from PORTA
         MOVLF  B'00000010',TIMECOUNT   ;Initalize TIMECOUNT to 2 for delay element
-		MOVLF  B'11111111',TMR0H 		;Added by AC - DO NOT MODIFY
+	MOVLF  B'11111111',TMR0H 		;Added by AC - DO NOT MODIFY
         MOVLF  B'00000000',TMR0L 		;Added by AC - DO NOT MODIFY
-		bcf PORTC,RC1 					;Added by AC - DO NOT MODIFY
-		bsf RCON,IPEN				   ;Enable high/low interrupt structure (technical register)
-		bsf INTCON,INT0IE			   ;Enable INT0 High-Priority interrupt
-		bsf INTCON3,INT1IE			   ;Enable INT1 interrupt
-		bcf INTCON3,INT1IP			   ;Toggle INT1 as low-priority interrupt
-		bsf INTCON2,INTEDG0			   ;Toggle INT0 to begin pulsing at rising edge
-		bsf INTCON2,INTEDG1			   ;Toggle INT1 to begin pulsing at rising edge
-		bsf INTCON,GIEL				   ;Enable gloabl interrupt for low-priority interrupts
-		bsf INTCON,GIEH				   ;Enable global interrupt for all interrupts
+	bcf PORTC,RC1 					;Added by AC - DO NOT MODIFY
+	bsf RCON,IPEN				   ;Enable high/low interrupt structure (technical register)
+	bsf INTCON,INT0IE			   ;Enable INT0 High-Priority interrupt
+	bsf INTCON3,INT1IE			   ;Enable INT1 interrupt
+	bcf INTCON3,INT1IP			   ;Toggle INT1 as low-priority interrupt
+	bsf INTCON2,INTEDG0			   ;Toggle INT0 to begin pulsing at rising edge
+	bsf INTCON2,INTEDG1			   ;Toggle INT1 to begin pulsing at rising edge
+	bsf INTCON,GIEL				   ;Enable gloabl interrupt for low-priority interrupts
+	bsf INTCON,GIEH				   ;Enable global interrupt for all interrupts
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	;Write your code here for the following tasks:		
