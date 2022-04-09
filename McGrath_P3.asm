@@ -60,7 +60,7 @@ Initial
         MOVLF  B'10001110',ADCON1      ;Enable PORTA & PORTE digital I/O pins
         MOVLF  B'11100001',TRISA       ;Set I/O for PORTA
         MOVLF  B'11011111',TRISB       ;Set I/O for PORTB
-		MOVLF  B'11010000',TRISC       ;Set I/0 for PORTC
+	MOVLF  B'11010000',TRISC       ;Set I/0 for PORTC
         MOVLF  B'00001111',TRISD       ;Set I/O for PORTD
         MOVLF  B'00000100',TRISE       ;Set I/O for PORTE
         MOVLF  B'10001000',T0CON       ;Set up Timer0 for a looptime of 10 ms
