@@ -80,14 +80,14 @@ Loop
 			; (1) WRITE CODE FOR MEMORY BUFFER HERE
 			;       you may write the full code 
 			;		here or call a subroutine
-
+	memory_buffer
 		movff value_1, value_y ; save x[n-1] into y[n]
 		movff value, value_1 ; save x[n] into x[n-1]
 			; ---------------------------------
 			; (2) WRITE CODE FOR ADDER AND "DIVIDER" HERE 
 			;       you may write the full code 
 			;		here or call a subroutine
-
+	adder_divider
 		addwf value_y ; add x[n] (from current contents of W) into value_y (AKA x[n-1])
 		rrcf value_y, 1 ; divide by 2 for final y[n] value
 
